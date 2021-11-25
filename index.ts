@@ -3,8 +3,11 @@ import './style.css';
 
 import testParenthesis from './scripts/parenthesis';
 import testAnagram, { testAnagramWithSort } from './scripts/anagram';
-testParenthesis();
+import { testSortByCharacterthenByNumber } from './scripts/general';
 
+testSortByCharacterthenByNumber();
+
+testParenthesis();
 testAnagram();
 testAnagramWithSort();
 

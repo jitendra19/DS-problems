@@ -1,40 +1,51 @@
-function anagram(str1, str2) {
-  const temp = {};
-  let returnVal = true;
-  for (let i in str1) {
-    if (temp[str1[i]]) temp[str1[i]]++;
-    else temp[str1[i]] = 1;
+function BSRecur(arr, value, high, low) {
+  if (high < low) {
+    console.log(-1);
+    return -1;
   }
-  for (let i in str2) {
-    if (temp[str2[i]]) temp[str2[i]]--;
-    else {
-      returnVal = false;
-      break;
-    }
+  let mid = parseInt((high + low) / 2);
+  if (arr[mid] === value) {
+    console.log(mid);
+    return mid;
+  } else if (arr[mid] > value) {
+    return BSRecur(arr, value, mid - 1, 0);
   }
-  if (returnVal) {
-    for (let i in temp) {
-      if (temp[i] > 0) {
-        returnVal = false;
-        break;
-      }
-    }
-  }
-  return returnVal;
-}
-export default function testAnagram() {
-  console.log(anagram('loop', 'pool') === true);
-  console.log(anagram('loop1', 'pool') === false);
-  console.log(anagram('loop', 'pool1') === false);
-  console.log(anagram('loop', '') === false);
+  return BSRecur(arr, value, high, mid + 1);
 }
 
-function anagramWithSort(str1, str2) {
-  return str1.split('').sort().join('') === str2.split('').sort().join('');
-}
-export function testAnagramWithSort() {
-  console.log(anagramWithSort('loop', 'pool') === true);
-  console.log(anagramWithSort('loop1', 'pool') === false);
-  console.log(anagramWithSort('loop', 'pool1') === false);
-  console.log(anagramWithSort('loop', '') === false);
+let arr = [
+  3,
+  5,
+  7,
+  9,
+  12,
+  14,
+  144,
+  155,
+  198,
+  201,
+  999,
+  1675,
+  3453,
+  4563,
+  32414,
+  234221,
+  1234561
+];
+
+BSRecur(arr, 144, arr.length, 0); // 6
+BSRecur(arr, 3, arr.length, 0); // 0
+BSRecur(arr, 1234561, arr.length, 0); // 16
+BSRecur(arr, 123, arr.length, 0); // -1
+
+BSRecur(arr, 999, arr.length, 0); // 10
+BSRecur(arr, 32414, arr.length, 0); // 14
+BSRecur(arr, 3453, arr.length, 0); // 12
+BSRecur(arr, 12, arr.length, 0); // 4
+
+export default function testAnagram() {
+  console.log(anagram("loop", "pool") === true);
+  console.log(anagram("loop1", "pool") === false);
+  console.log(anagram("loop", "pool1") === false);
+  console.log(anagram("loop", "") === false);
 }

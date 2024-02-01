@@ -1,12 +1,13 @@
 function throttling(func, t) {
     let shouldWait = false;
     return (...args) => {
-        if(!shouldWait) return;
-        func(args);
-        shouldWait = true;
-        setTimeout(() => {
-            shouldWait = false;
-        }, t)
+        if(!shouldWait) {
+            func(args);
+            shouldWait = true;
+            setTimeout(() => {
+                shouldWait = false;
+            }, t)
+        };
     }
 }
 // console.log('asdfasdf')
@@ -19,6 +20,11 @@ throttle();
 throttle();
 throttle();
 throttle();
+
+window.addEventListener("scroll", throttle);
+setTimeout( ()=> {
+    window.removeEventListener("scroll", throttle);
+}, 5000);
 
 function debouncing(callback, t) {
     let timeout;

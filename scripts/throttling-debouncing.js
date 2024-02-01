@@ -25,13 +25,24 @@ window.addEventListener("scroll", throttle);
 setTimeout( ()=> {
     window.removeEventListener("scroll", throttle);
 }, 5000);
-
-function debouncing(callback, t) {
-    let timeout;
+# ------------------------- -------------------------------
+function debounce(func, time) {
+    let timer;
     return (...args) => {
-        clearTimeout(timeout);
-        timeout = setTimeout(()=> {
-            callback(args);
-        }, t);
+        clearTimeout(timer);
+        timer = setTimeout(()=> {
+            func(...args);
+        }, time)
     }
 }
+
+ab = debounce((i)=> {
+        console.log('I am called using debounce- '+ i)
+    }, 1000)
+
+
+window.addEventListener("scroll", ab);
+
+setTimeout( () => {
+    window.removeEventListener('scroll', ab);
+}, 20000)

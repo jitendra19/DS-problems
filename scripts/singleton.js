@@ -3,18 +3,17 @@ singleton = (function() {
         this.age = age || 10;
     }
     let instance;
-    return {
-        getInstance: function(val) {
-            if(!instance) instance = new abc(val);
-            return instance;
-        }
+    return (val) => {
+        if(!instance) instance = new abc(val);
+        return instance;
     }
-})()
+})();
 
-console.log(singleton.getInstance(15))
-console.log(singleton.getInstance())
-console.log(singleton.getInstance(10))
+console.log(singleton(15)) 
+console.log(singleton())
+console.log(singleton(10))
 
-const a = singleton.getInstance(15);
-const b = singleton.getInstance(10);
-console.log("Singleton testing --- ", a === b);
+const a = singleton(15).age;
+const b = singleton(10).age;
+console.log("Singleton testing --- ",a===b);
+console.log("Singleton testing --- ", a===15);
